@@ -7,10 +7,12 @@ Training Data : 42000 Image Data of 784 pixels each
 
 Test Data : 28000 Image Data of 784 pixels each
 
-Classifier : Randomn Forest Classifier with no of estimator = 80
-
-Accuracy = 96.2%
-
 New Classifier : Convolution Neural Networks (Dense)
 
 Accuracy = 99.1 %
+
+Old Classifier : Randomn Forest Classifier with no of estimator = 80
+
+Accuracy = 96.2%
+
+
