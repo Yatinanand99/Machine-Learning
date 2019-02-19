@@ -11,7 +11,7 @@ from keras.layers import Dropout
 classifier = Sequential()
 
 # Convolution
-classifier.add(Convolution2D(32, 5, 5, input_shape = (156, 156, 3), activation = 'relu'))
+classifier.add(Convolution2D(64, 5, 5, input_shape = (64, 64, 3), activation = 'relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 
 # Adding more convolutional layer
@@ -19,7 +19,7 @@ classifier.add(Convolution2D(64, 3, 3, activation = 'relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 classifier.add(Convolution2D(128, 3, 3, activation = 'relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
-classifier.add(Convolution2D(128, 3, 3, activation = 'relu'))
+classifier.add(Convolution2D(64, 3, 3, activation = 'relu'))
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
 classifier.add(Dropout(0.2))
 
@@ -28,9 +28,8 @@ classifier.add(Flatten())
 
 # Full connection
 classifier.add(Dense(output_dim = 128, activation = 'relu'))
-classifier.add(Dense(output_dim = 256, activation = 'relu'))
-classifier.add(Dropout(0.5))
-classifier.add(Dense(output_dim = 1, activation = 'sigmoid'))
+classifier.add(Dropout(0.4))
+classifier.add(Dense(output_dim = 2, activation = 'softmax'))
 
 # Compiling the CNN
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
@@ -45,22 +44,29 @@ train_datagen = ImageDataGenerator(rescale = 1./255,
                                    rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180) 
                                    width_shift_range=0.1, 
                                    height_shift_range=0.1, 
-                                   validation_split = 0.2,
                                    shear_range = 0.2,
                                    zoom_range = 0.2,
-                                   horizontal_flip = True)
+                                   horizontal_flip = True,
+                                   validation_split = 0.25)
 
 
 training_set = train_datagen.flow_from_directory('cell_images',
-                                                 target_size = (156, 156),
-                                                 batch_size = 32,
-                                                 class_mode = 'binary')
+                                                 target_size = (64, 64),
+                                                 batch_size = 64,
+                                                 class_mode = 'categorical',
+                                                 subset = 'training')
+
+validation_set = train_datagen.flow_from_directory('cell_images',
+                                                 target_size = (64, 64),
+                                                 batch_size = 64,
+                                                 class_mode = 'categorical',
+                                                 subset = 'validation')
 
 
 # Fitting the classifier to dataset
 classifier.fit_generator(training_set,
-                              epochs = 20,steps_per_epoch = len(training_set),
-                              verbose = 1,validation_steps = (len(training_set)/2))
+                              epochs = 20,steps_per_epoch = 2000,
+                              verbose = 1,validation_steps = 1000, validation_data = validation_set)
 
 # Saving Models and Weights to a JSON and H5 file respectively
 model_json = classifier.to_json()
