@@ -1,5 +1,4 @@
 #Importing Important Libraries
-import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -27,9 +26,9 @@ def __plot__(X_plot, label):
  
 
 #Fining the dataset for different categories    
-X_goalkeeper = X[:,-5:] # Goal-Keeper
-X_attacker = X[:,0:10]
-X_overall = X[:,[0,1,3,4,5,6,7,9,10,11,12,13,14,15,17,18,19,22,23,24]]
+X_goalkeeper = X[:,-5:] # Best for Goal-Keeper
+X_attacker = X[:,0:10]  # Best for Attacker or Forward Player
+X_overall = X[:,[0,1,3,4,5,6,7,9,10,11,12,13,14,15,17,18,19,22,23,24]]  # Overall best Player
 
 __plot__(X_goalkeeper, "goal_keeper")
 __plot__(X_attacker, "attacker")
