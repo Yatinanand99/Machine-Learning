@@ -30,3 +30,11 @@ Classifier : Convolution Neural Networks (Dense)
 Optimizer : Adam
 
 Validation Accuracy : 96 %
+
+
+# Project 3 Fifa 19 Data Analysis
+Input Data : 18207 X 89 data of different Fifa 19 players
+
+Output/Analysis : Images/.. The graphs of Player Analysis , UPPER RIGHT IN GRAPH IS CLUSTER OF BETTER PLAYERS THAN LOWER LEFT
+
+Process : Data cleaning and preprocessing then graphical analysis
