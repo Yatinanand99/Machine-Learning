@@ -38,3 +38,11 @@ Input Data : 18207 X 89 data of different Fifa 19 players
 Output/Analysis : Images/.. The graphs of Player Analysis , UPPER RIGHT IN GRAPH IS CLUSTER OF BETTER PLAYERS THAN LOWER LEFT
 
 Process : Data cleaning and preprocessing then graphical analysis
+
+# Project 4 Dog Breed Classifier
+Input Data : Over 20,000 Images of 120 Breeds of Dogs
+
+Optimiziers and various Info : Adam Optimizer with learning rate of 0.001 , Softmax Activation with Categorical Cross entropy
+
+Output : Learning accuracy with 50 epochs : 23% / Validation Accurcay : 20% and both increasing per epochs
+Note : Due to lack of memory and time I was unable to perform more epochs but the saved weights and model can be used for further learning of model.
